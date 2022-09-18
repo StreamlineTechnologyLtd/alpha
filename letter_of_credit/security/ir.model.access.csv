@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_letter_of_credit_letter_of_credit,letter_of_credit.letter_of_credit,model_letter_of_credit_letter_of_credit,base.group_user,1,1,1,1
+access_banks_banks,banks.banks,model_banks_banks,base.group_user,1,1,1,1
+access_country_orign,country.orign,model_country_orign,base.group_user,1,1,1,1
+access_continent_continent,continent.continent,model_continent_continent,base.group_user,1,1,1,1
+access_payment_transaction,payment.transaction,model_payment_transaction,base.group_user,1,1,1,1
