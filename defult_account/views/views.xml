@@ -1,54 +1,71 @@
 <odoo>
   <data>
-    <record id="view_company_form" model="ir.ui.view">
-    <field name="name">res.company.form.inherit.account</field>
-    <field name="model">res.company</field>
-    <field name="inherit_id" ref="base.view_company_form"/>
-    <field name="arch" type="xml">    
-        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
-        <page string="Default Accounts" name="default_account">
-          <group >
-            <group string="Exchange Accounts">
-               <field name="currency_exchange_journal_id"/> 
-              <field name="income_currency_exchange_account_id"/>
-              <field name="expense_currency_exchange_account_id"/>
-            </group>
-            <group />
-          </group>
-        </page>
-      </xpath>
-    </field>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="defult_account_list">
+      <field name="name">defult.account.form</field>
+      <field name="model">defult_account.defult_account</field>
+      <field name="arch" type="xml">
+        <form>
+            <header>
+            </header>
+             <sheet>
+                  <div class="oe_title">
+                    <h1>
+                        <field name="company_id" required="1" placeholder="Name..."/>
+                    </h1>
+                </div>
+                 <group>
+          <field name="currency_exchange_journal_id"/>
+          <field name="income_currency_exchange_account_id"/>
+          <field name="expense_currency_exchange_account_id"/>
+                      </group>
+          </sheet>
+        </form>
+                
+                     
+      </field>
     </record>
-  </data>
-    
-    
-    
-<!--     <record id="res_config_settings_view_form_inhert" model="ir.ui.view">
-    <field name="name">res.config.settings.view.form.inherit.view.account</field>
-    <field name="model">res.config.settings</field>
-    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
-    <field name="arch" type="xml">   
-        <xpath expr="//field[@name='currency_exchange_journal_id']" position="attributes">
-<field name="has_chart_of_accounts" invisible="1"/>
-        </xpath>
-       
-    </field>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="defult_account.action_window">
+      <field name="name">Defult Accounts </field>
+      <field name="res_model">defult_account.defult_account</field>
+      <field name="view_mode">tree,form</field>
     </record>
+
+
+    <!-- server action to the one above -->
+<!--
+    <record model="ir.actions.server" id="defult_account.action_server">
+      <field name="name">defult_account server</field>
+      <field name="model_id" ref="model_defult_account_defult_account"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": model._name,
+        }
+      </field>
+    </record>
+-->
+
+    <!-- Top menu item -->
+<!--
+    <menuitem name="defult_account" id="defult_account.menu_root"/>
+-->
+    <!-- menu categories -->
+<menuitem name="Defult Accounts" id="defult_account.menu_1" parent="account.menu_finance_configuration"
+      action="defult_account.action_window" sequence="151" />
+      
+    <!-- actions -->
+<!--
+    <menuitem name="List" id="defult_account.menu_1_list" parent="defult_account.menu_1"
+              action="defult_account.action_window"/>
+    <menuitem name="Server to list" id="defult_account" parent="defult_account.menu_2"
+              action="defult_account.action_server"/>
+-->
   </data>
-     -->
-    
-        <!--
-        <xpath expr="//field[@name='vat']" position="after">
-    <field name="child_ids"/>
-  </xpath>
-  <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='default_account']/group[1]/group[1]" position="inside">
-    <field name="annual_inventory_month"/>-->
-    <!--<field name="default_cash_difference_income_account_id"/>
-    <field name="currency_exchange_journal_id"/>
-    <field name="income_currency_exchange_account_id"/>
-    <field name="expense_currency_exchange_account_id"/>-->
-  <!--</xpath>-->
-        
-        
-     
 </odoo>
