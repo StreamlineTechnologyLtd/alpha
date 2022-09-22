@@ -2,24 +2,182 @@
   <data>
     <!-- explicit list view definition -->
 
-    <record model="ir.ui.view" id="letter_of_credit.list">
-      <field name="name">letter of credit list</field>
+    <record model="ir.ui.view" id="letter_of_credit_list">
+      <field name="name">letter.of.credit.list</field>
       <field name="model">letter_of_credit.letter_of_credit</field>
       <field name="arch" type="xml">
-        <tree>
-          <field name="create_date"/>
+        <tree sample="1">
+          <field name="write_date"/>
           <field name="payment_date"/>
           <field name="name"/>
-          <field name="jornal_id"/>
+<!--           <field name="jornal_id"/> -->
           <field name="partner_id"/>
         </tree>
       </field>
     </record>
 
 
+      
+      
+      
+       <record model="ir.ui.view" id="letter_of_credit_form">
+      <field name="name">letter.of.credit.form</field>
+      <field name="model">letter_of_credit.letter_of_credit</field>
+      <field name="arch" type="xml">
+        <form sample="1">
+          <header>
+                <field name="state" widget="statusbar" statusbar_visible="draft,submit,closed"/>
+                <button name="open_submit_lc" type="object" string="Submit LC" class="oe_highlight" />
+                <button name="%(create_lc_action)d" string="Confirm" data-hotkey="l"
+                            type="action" context="{'journal_id':active_id}" />
+                              <button name="close" class="oe_highlight"  string="Closed" type="object"/>
+
+
+                
+               
+
+                
+            </header>
+             <sheet string="Countries">
+                <div class="oe_title">
+                    <h1>
+                        <field name="name" required="1" placeholder="Name..."/>
+                    </h1>
+                </div>
+                 <group>
+                 <group>
+                                <field name="payment_type" widget="selection" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                                <field name="moyen" attrs="{'readonly':[('moyen', 'in', ('lc','swift'))]}"/>
+                                <field name="partner_type" widget="selection" />
+                                <field name="partner_id" />
+                                <field name="amount" />
+                                <field name="vendors"/> 
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="currency_id" options="{'no_create': True, 'no_open': True}" groups="base.group_multi_currency" />
+                                <field name="journal_id" widget="selection"/>
+                                <field name="insurance_lc_fees" readonly="0" />
+                                <field name="applicant_bank" string="Applicant Bank"/>
+                                <field name="receiver_bank" string="Receiver Bank" />
+                                <field name="notifying_bank" string="Notifying Bank" />
+                                <field name="inspection_company" string="Inspection Company" />
+                                <!--<field name="country_of_origin" string="Country Of Origin" required="1" attrs="{'invisible':[('moyen', 'not in', 'lc')]}"/>-->
+                                <field name="country_of_origin" widget="many2many_tags" options="{'color_field': 'color','no_create_edit': True}" placeholder="Countries..."/>
+                                <field name="continent" widget="many2many_tags" options="{'color_field': 'color'}" />
+                                <field name="company_id"/>
+                                <field name="write_date"/>
+                                <field name="goods_description" string="Goods Description" />
+                                
+                                
+                            </group>
+                
+                 <group>
+                     
+                     <field name="payment_date"/>
+                     <field name="communication" attrs="{'invisible': [('state', '!=', 'draft'), ('communication', '=', False)], 'readonly': [('state', '!=', 'draft')]}"/>
+                     <field name="partial" string="Partial Expedition" />
+                    <field name="incoterm_lc" string="Incoterm"/>
+                    <field name="lc_currency_rate" string="Initial Currency Rate"/>
+                    <field name="lc_currency_final_rate" string="Final Currency Rate"  />
+                    <field name="date_of_expiry" string="Date of Expiry" />
+                    <field name="date_of_shipment" string="Latest date of Shipment" />
+                    <field name="lc_type" string="LC Type" /> 
+                     <field name="remainder_value" string="Remainder Value" /> 
+                </group>
+ </group>
+                  <notebook>
+                        <page string="Required Documents" >
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="bill_of_lading"/>
+                                    <label for="bill_of_lading" string="Bill of Lading"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="free_sale_certificate"/>
+                                    <label for="free_sale_certificate" string="Free Sale Certificate"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="health_certificate"/>
+                                    <label for="health_certificate" string="Health Certificate"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <field name="air_way_bill"/>
+                                    <label string="Air Way Bill" for="air_way_bill"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="commercial_invoice"/>
+                                    <label for="commercial_invoice" string="Commercial Invoice"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <field name="packing_list"/>
+                                    <label string="Packing List" for="packing_list"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="certificate_of_origin"/>
+                                    <label for="certificate_of_origin" string="Certificate Of Origin"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <field name="certificate_of_analysis"/>
+                                    <label string="Certificate Of Analysis" for="certificate_of_analysis"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_left_pane">
+                                    <field name="certificate_of_inspection"/>
+                                    <label for="certificate_of_inspection" string="Certificate Of Inspection"/>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <field name="insurrance_certificate"/>
+                                    <label string="Insurrance Certificate" for="insurrance_certificate"/>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-6 o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <field name="vessel_declaration"/>
+                                    <label string="Vessel Declaration" for="vessel_declaration"/>
+                                </div>
+                            </div>
+
+
+                        </page>
+                        <page string="Proforma" >
+                            
+                                
+                        </page>
+                    </notebook>
+                 
+                 
+                 
+            </sheet>
+        </form>
+      </field>
+    </record>
+      
+      
+      
+      
+      
 
     <record model="ir.actions.act_window" id="letter_of_credit.action_window">
-      <field name="name">letter of credit window</field>
+      <field name="name">letter of credit</field>
       <field name="res_model">letter_of_credit.letter_of_credit</field>
       <field name="view_mode">tree,form</field>
     </record>
@@ -47,7 +205,8 @@
 -->
     <!-- menu categories -->
 
-    <menuitem name="Letter of Credit" id="letter_of_credit.menu_1" parent="account.menu_finance_payables"/>
+    <menuitem name="Letter of Credit" id="letter_of_credit.menu_1" parent="account.menu_finance_payables"
+      action="letter_of_credit.action_window" sequence="150" />
 
     <!-- actions -->
 <!--

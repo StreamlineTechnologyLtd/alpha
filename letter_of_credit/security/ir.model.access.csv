@@ -3,4 +3,5 @@ access_letter_of_credit_letter_of_credit,letter_of_credit.letter_of_credit,model
 access_banks_banks,banks.banks,model_banks_banks,base.group_user,1,1,1,1
 access_country_orign,country.orign,model_country_orign,base.group_user,1,1,1,1
 access_continent_continent,continent.continent,model_continent_continent,base.group_user,1,1,1,1
-access_payment_transaction,payment.transaction,model_payment_transaction,base.group_user,1,1,1,1
+access_popup_window,popup.windo,model_popup_windo,base.group_user,1,1,1,1
+

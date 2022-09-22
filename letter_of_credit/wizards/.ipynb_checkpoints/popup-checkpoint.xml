@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="create_cl_form" model="ir.ui.view">
+        <field name="name">create.lc</field>
+        <field name="model">popup.windo</field>
+        <field name="arch" type="xml">
+            <form string="Choose">
+                <group >
+                    <field name="percentage_box"  />
+                    <field name="percentage"/>
+                    <field name="value_box"/>
+                    <field name="value"/>
+                </group>
+                <footer>
+                    <button name="action_create" string="Creat" type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel" data-hotkey="z"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="create_lc_action" model="ir.actions.act_window">
+        <field name="name">Submet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">popup.windo</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="create_cl_form"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

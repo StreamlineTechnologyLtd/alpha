@@ -1,0 +1,58 @@
+<odoo>
+  <data>
+      
+      <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="10"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="LC" string="LC" data-key="lc">
+                    <h2>LC</h2>
+                    <div class="row mt16 o_settings_container" name="catalog_setting_container">
+                            <div>
+                            <label for="bank_account"/>
+                            <field name="bank_account"/>
+                            <label for="letter_of_credit_account"/>
+                            <field name="letter_of_credit_account"/>
+                        </div>
+                          
+                            <div>
+                            
+                        </div>
+                            
+                            <div>
+                            <label for="bank_commission"/>
+                            <field name="bank_commission"/>
+                            <label for="credit_reservations"/>
+                            <field name="credit_reservations"/>
+                        </div>
+                            <div>
+                            
+                            <label for="account_journal"/>
+                            <field name="account_journal"/>
+                        </div>
+                            
+                     </div>
+                    </div>
+                
+                    
+      </xpath>
+      </field>
+          </record>
+      <record id="action_lc_config_settings" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_id" ref="res_config_settings_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'letter_of_credit.letter_of_credit'}</field>
+    </record>
+      
+     <menuitem name="settings" id="letter_of_credit.settings" parent="account.menu_finance_configuration"
+              action="action_lc_config_settings"/>  
+      
+    </data>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        
+<!--         
+    <record model="ir.rule" id="letter_of_credit_com_rule">
+    <field name="name">letter of credit</field>
+    <field name="model_id" ref="model_letter_of_credit_letter_of_credit"/>
+    <field name="global" eval="True"/>
+    <field name="domain_force"> [('company_id', 'in', company_ids)] </field>
+    </record> -->
+        
+        
+    </data>
+</odoo>

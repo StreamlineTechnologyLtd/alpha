@@ -1,0 +1,54 @@
+<odoo>
+  <data>
+    <record id="view_company_form" model="ir.ui.view">
+    <field name="name">res.company.form.inherit.account</field>
+    <field name="model">res.company</field>
+    <field name="inherit_id" ref="base.view_company_form"/>
+    <field name="arch" type="xml">    
+        <xpath expr="//form[1]/sheet[1]/notebook[1]" position="inside">
+        <page string="Default Accounts" name="default_account">
+          <group >
+            <group string="Exchange Accounts">
+               <field name="currency_exchange_journal_id"/> 
+              <field name="income_currency_exchange_account_id"/>
+              <field name="expense_currency_exchange_account_id"/>
+            </group>
+            <group />
+          </group>
+        </page>
+      </xpath>
+    </field>
+    </record>
+  </data>
+    
+    
+    
+<!--     <record id="res_config_settings_view_form_inhert" model="ir.ui.view">
+    <field name="name">res.config.settings.view.form.inherit.view.account</field>
+    <field name="model">res.config.settings</field>
+    <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+    <field name="arch" type="xml">   
+        <xpath expr="//field[@name='currency_exchange_journal_id']" position="attributes">
+<field name="has_chart_of_accounts" invisible="1"/>
+        </xpath>
+       
+    </field>
+    </record>
+  </data>
+     -->
+    
+        <!--
+        <xpath expr="//field[@name='vat']" position="after">
+    <field name="child_ids"/>
+  </xpath>
+  <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='default_account']/group[1]/group[1]" position="inside">
+    <field name="annual_inventory_month"/>-->
+    <!--<field name="default_cash_difference_income_account_id"/>
+    <field name="currency_exchange_journal_id"/>
+    <field name="income_currency_exchange_account_id"/>
+    <field name="expense_currency_exchange_account_id"/>-->
+  <!--</xpath>-->
+        
+        
+     
+</odoo>
